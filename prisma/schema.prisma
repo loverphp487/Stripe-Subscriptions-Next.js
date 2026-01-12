@@ -28,7 +28,7 @@ model User {
   email        String        @unique
   name         String?
   image        String?
-  customerId   String?       @unique
+  customerId   String?       
   plan         Plan          @default(free)
   subscription Subscription?
 
