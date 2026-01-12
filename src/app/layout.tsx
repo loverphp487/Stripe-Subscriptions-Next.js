@@ -4,6 +4,7 @@ import './globals.css';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { Navbar } from '@/components/Navbar';
 import TanStackProvider from '@/components/providers/TanStackProvider';
+import { KindeProvider } from '@kinde-oss/kinde-auth-nextjs';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,17 +21,19 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={inter.className}>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-					disableTransitionOnChange
-				>
-					<TanStackProvider>
-						<Navbar />
-						{children}
-					</TanStackProvider>
-				</ThemeProvider>
+				<KindeProvider>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
+						<TanStackProvider>
+							<Navbar />
+							{children}
+						</TanStackProvider>
+					</ThemeProvider>
+				</KindeProvider>
 			</body>
 		</html>
 	);
