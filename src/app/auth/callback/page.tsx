@@ -8,7 +8,7 @@ import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 
 type Props = {};
 
-const page = (props: Props) => {
+const AuthCallback = (props: Props) => {
 	const router = useRouter();
 	const { user, isLoading: isKindeLoading } = useKindeBrowserClient();
 	const { data, isLoading: isQueryLoading } = useQuery<{ success: boolean }>({
@@ -48,4 +48,4 @@ const page = (props: Props) => {
 	);
 };
 
-export default page;
+export default AuthCallback;
