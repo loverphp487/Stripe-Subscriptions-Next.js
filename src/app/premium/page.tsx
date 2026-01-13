@@ -2,6 +2,10 @@ import prisma from '@/db/prisma';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { redirect } from 'next/navigation';
 
+/**
+ * Page that is only visible to premium users
+ * @returns {JSX.Element} The page content
+ */
 const Page = async () => {
 	const { getUser } = getKindeServerSession();
 	const user = await getUser();
