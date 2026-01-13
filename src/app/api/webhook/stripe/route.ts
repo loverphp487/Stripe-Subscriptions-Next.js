@@ -109,7 +109,33 @@ export async function POST(req: Request) {
 				}
 				break;
 			case 'customer.subscription.deleted':
-				console.log('customer.subscription.deleted');
+				const subscription = await stripe.subscriptions.retrieve(
+					event.data.object.id,
+				);
+
+				const customer = await stripe.customers.retrieve(
+					subscription.customer as string,
+				);
+
+				const user = await prisma.user.findUnique({
+					where: {
+						id: customer.id,
+					},
+				});
+
+				if (user) {
+					await prisma.user.update({
+						where: {
+							id: user.id,
+						},
+						data: {
+							plan: 'free',
+						},
+					});
+				} else {
+					console.error('User not found for the subscription deleted event.');
+					throw new Error('User not found for the subscription deleted event.');
+				}
 				break;
 			default:
 				console.log(`Unhandled event type ${event.type}`);
