@@ -113,13 +113,13 @@ export async function POST(req: Request) {
 					event.data.object.id,
 				);
 
-				const customer = await stripe.customers.retrieve(
+				const customer: any = await stripe.customers.retrieve(
 					subscription.customer as string,
 				);
 
 				const user = await prisma.user.findUnique({
 					where: {
-						id: customer.id,
+						email: customer?.email as any,
 					},
 				});
 
@@ -130,6 +130,11 @@ export async function POST(req: Request) {
 						},
 						data: {
 							plan: 'free',
+						},
+					});
+					await prisma.subscription.delete({
+						where: {
+							userId: user.id,
 						},
 					});
 				} else {
