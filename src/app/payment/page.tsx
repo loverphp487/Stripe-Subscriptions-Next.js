@@ -9,7 +9,11 @@ export default function SuccessPage() {
 	const [result, setResult] = useState<string | null>(null);
 
 	useEffect(() => {
-		if (!sessionId) return;
+		if (!sessionId) {
+			setLoading(false);
+			setResult('Error verifying payment.');
+			return;
+		}
 
 		const checkStatus = async () => {
 			try {
