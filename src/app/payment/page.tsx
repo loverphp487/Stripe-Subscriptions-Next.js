@@ -33,5 +33,6 @@ export default function SuccessPage() {
 		checkStatus();
 	}, [sessionId]);
 
+	if (loading) return <div>Verifying your payment...</div>;
 	return <div>{result}</div>;
 }
