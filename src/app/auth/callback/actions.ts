@@ -21,7 +21,6 @@ export async function checkAuthStatus() {
 	});
 
 	if (!existingUser) {
-		console.log('no existing user');
 		await prisma.user.create({
 			data: {
 				id: user.id,
