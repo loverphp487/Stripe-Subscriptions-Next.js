@@ -1,7 +1,7 @@
 import { stripe } from '@/lib/stripe';
 import { NextRequest, NextResponse } from 'next/server';
 
-export default async function GET(req: NextRequest) {
+export async function GET(req: NextRequest) {
 	const { searchParams } = new URL(req.url);
 	const sessionId = searchParams.get('session_id');
 
